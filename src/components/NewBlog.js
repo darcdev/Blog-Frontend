@@ -26,7 +26,7 @@ const NewBlog = ({ setBlogs }) => {
       setBlogs((blogs) => [...blogs, blog]);
       setError(`A new Blog ${title} by ${author} added`);
     } catch (error) {
-      setError(`Error creating a new blog`);
+      setError('Error creating a new blog');
     }
   };
 

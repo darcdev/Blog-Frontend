@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import loginService from "../services/login";
-import blogService from "../services/blogs";
-import Notification from "../components/Notification";
+import React, { useState } from 'react';
+import loginService from '../services/login';
+import blogService from '../services/blogs';
+import Notification from '../components/Notification';
 
 const Login = ({ setUser }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const user = await loginService.login({ username, password });
-      window.localStorage.setItem("loggedUser", JSON.stringify(user));
+      window.localStorage.setItem('loggedUser', JSON.stringify(user));
       blogService.setToken(user.token);
-      setError("");
+      setError('');
       setUser(user);
-      setUsername("");
-      setPassword("");
+      setUsername('');
+      setPassword('');
     } catch (error) {
       console.log(error);
-      setError("Wrong credentials");
+      setError('Wrong credentials');
     }
   };
 
