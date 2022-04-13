@@ -1,24 +1,42 @@
-import React, { useEffect, useState } from "react";
-import Blog from "./Blog";
-import NewBlog from "./NewBlog";
-import blogService from "../services/blogs";
-const Blogs = () => {
+import React, { useEffect, useState } from 'react';
+import Blog from './Blog';
+import NewBlog from './NewBlog';
+import blogService from '../services/blogs';
+import Togglable from './Togglable';
+const Blogs = ({ user }) => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     const getBlogs = async () => {
       const blogs = await blogService.getAll();
-      console.log(blogs);
       setBlogs(blogs);
     };
     getBlogs();
   }, []);
 
+  const removeBlog = async ({ id, title, author }) => {
+    try {
+      const responseDelete = window.confirm(
+        `Remove blog ${title} by ${author}`
+      );
+      if (!responseDelete) return;
+
+      await blogService.remove(id);
+      const updateBlogs = blogs.filter((blog) => blog.id !== id);
+      setBlogs(updateBlogs);
+    } catch (error) {
+      console.log('Ha ocurrido un error al eliminar el blog', error);
+    }
+  };
+
   return (
     <>
-      <NewBlog setBlogs={setBlogs} />
+      <Togglable buttonLabel="create note">
+        <NewBlog setBlogs={setBlogs} />
+      </Togglable>
+      <h2>Blogs</h2>
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
+        <Blog user={user} key={blog.id} blog={blog} removeBlog={removeBlog} />
       ))}
     </>
   );

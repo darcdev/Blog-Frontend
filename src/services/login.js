@@ -1,5 +1,5 @@
-import axios from "axios";
-const baseUrl = "/api/auth";
+import axios from 'axios';
+const baseUrl = '/auth';
 
 const login = async (credentials) => {
   const response = await axios.post(baseUrl, credentials);

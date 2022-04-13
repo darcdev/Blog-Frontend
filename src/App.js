@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Login from "./components/Login";
-import Blogs from "./components/Blogs";
-import blogService from "./services/blogs";
+import React, { useState, useEffect } from 'react';
+import Login from './components/Login';
+import Blogs from './components/Blogs';
+import blogService from './services/blogs';
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loggedUser = window.localStorage.getItem("loggedUser");
+    const loggedUser = window.localStorage.getItem('loggedUser');
     if (loggedUser) {
       const user = JSON.parse(loggedUser);
       setUser(user);
@@ -17,7 +17,7 @@ const App = () => {
 
   const handleClose = () => {
     setUser(null);
-    window.localStorage.removeItem("loggedUser");
+    window.localStorage.removeItem('loggedUser');
   };
   return (
     <div>
@@ -28,7 +28,7 @@ const App = () => {
           <button onClick={handleClose}>Cerrar Sesión</button>
         </div>
       )}
-      {user ? <Blogs /> : <Login setUser={setUser} />}
+      {user ? <Blogs user={user} /> : <Login setUser={setUser} />}
     </div>
   );
 };
