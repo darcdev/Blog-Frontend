@@ -29,6 +29,18 @@ const Blogs = ({ user }) => {
     }
   };
 
+  const updateBlog = async (updateObject) => {
+    try {
+      const { blog: chBlog } = await blogService.update(updateObject);
+      const updateBlogs = blogs.map((blog) =>
+        blog.id !== chBlog.id ? blog : chBlog
+      );
+      setBlogs(updateBlogs);
+    } catch (error) {
+      console.log('Ha ocurrido un error al actualizar like');
+    }
+  };
+
   return (
     <>
       <Togglable buttonLabel="create note">
@@ -36,7 +48,13 @@ const Blogs = ({ user }) => {
       </Togglable>
       <h2>Blogs</h2>
       {blogs.map((blog) => (
-        <Blog user={user} key={blog.id} blog={blog} removeBlog={removeBlog} />
+        <Blog
+          user={user}
+          key={blog.id}
+          blog={blog}
+          removeBlog={removeBlog}
+          updateBlog={updateBlog}
+        />
       ))}
     </>
   );
