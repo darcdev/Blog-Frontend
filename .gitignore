@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-/tests/cypress/videos
+/src/tests/cypress/videos
 # production
 /build
 
