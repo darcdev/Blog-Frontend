@@ -17,7 +17,10 @@ const Blog = ({ blog, removeBlog, updateBlog }) => {
   const user = userStorage ? JSON.parse(userStorage) : '';
 
   return (
-    <div style={{ border: '1px solid black', marginBottom: 5 }}>
+    <div
+      className="blog-container"
+      style={{ border: '1px solid black', marginBottom: 5 }}
+    >
       <h3>
         {blog.title} by {blog.author}
         <button onClick={() => setDetailsVisible(!detailsVisible)}>

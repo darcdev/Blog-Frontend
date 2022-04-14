@@ -28,7 +28,7 @@ const Login = ({ setUser }) => {
     <>
       <h2>Log in to application</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username: </label>
           <input
@@ -49,7 +49,9 @@ const Login = ({ setUser }) => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">login</button>
+        <button id="login-button" type="submit">
+          login
+        </button>
       </form>
 
       {error.length > 0 && <Notification message={error} setError={setError} />}

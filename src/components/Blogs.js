@@ -12,7 +12,7 @@ const Blogs = ({ user }) => {
       setBlogs(blogs);
     };
     getBlogs();
-  }, []);
+  }, [blogs]);
 
   const removeBlog = async ({ id, title, author }) => {
     try {
